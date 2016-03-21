@@ -12,13 +12,21 @@ Android 编程所使用的 Java 是一门使用垃圾收集器（GC, garbage col
 于是，当我们在 Activity 中声明一个静态变量引用了 Activity 自身，就会造成内存泄漏：
 
 >public class LeakActivity extends AppCompatActivity {
+
 >    private static Context sContext;
+
 >   @Override 
+
 >   protected void onCreate(Bundle savedInstanceState) {
+
 >       super.onCreate(savedInstanceState);
+
 >setContentView(R.layout.activity_leak);
+
 >       sContext = this;
+
 >    }
+
 >}
 
 这样的代码会导致当这个 Activity 结束的时候，sContext 仍然持有它的引用，致使 Activity 无法回收。
